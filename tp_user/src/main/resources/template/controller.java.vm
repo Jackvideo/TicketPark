@@ -1,0 +1,74 @@
+package ${package.Controller};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.web.bind.annotation.*;
+import cppp.common.util.ResultUtil;
+
+import $!{package.Service}.$!{table.serviceName};
+import ${package.Entity}.${entity};
+
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+    @Autowired
+    private ${table.serviceName} ${table.entityPath}Service;
+
+    //编辑或更新
+    @PostMapping("/saveOrUpdate")
+    public ResultUtil save(@RequestBody ${entity} ${table.entityPath}) {
+        return ResultUtil.success(${table.entityPath}Service.saveOrUpdate(${table.entityPath}));
+        }
+
+    //根据id删除
+    @DeleteMapping("/{id}")
+    public ResultUtil delete(@PathVariable Integer id) {
+        return ResultUtil.success(${table.entityPath}Service.removeById(id));
+        }
+
+    //查询全部
+    @GetMapping("/getAll")
+    public ResultUtil findAll() {
+        return ResultUtil.success(${table.entityPath}Service.list());
+        }
+
+    //根据id查询
+    @GetMapping("/{id}")
+    public ResultUtil findOne(@PathVariable Integer id) {
+        return ResultUtil.success(${table.entityPath}Service.list());
+        }
+
+    //分页查询
+    @GetMapping("/page")
+    public ResultUtil findPage(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+        return ResultUtil.success(${table.entityPath}Service.page(new Page<>(pageNum, pageSize)));
+        }
+
+}
+
+#end

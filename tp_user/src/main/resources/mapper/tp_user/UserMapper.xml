@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tp_user.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tp_user.model.entity.User">
+        <id column="userid" property="userid" />
+        <result column="account" property="account" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="balance" property="balance" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        userid, account, username, password, balance
+    </sql>
+
+</mapper>

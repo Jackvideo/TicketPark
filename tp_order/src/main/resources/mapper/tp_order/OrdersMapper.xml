@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tp_order.mapper.OrdersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tp_order.model.entity.Orders">
+        <id column="orderid" property="orderid" />
+        <result column="userid" property="userid" />
+        <result column="movieid" property="movieid" />
+        <result column="ticketprice" property="ticketprice" />
+        <result column="orderstate" property="orderstate" />
+        <result column="ordertime" property="ordertime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        orderid, userid, movieid, ticketprice, orderstate, ordertime
+    </sql>
+
+</mapper>
