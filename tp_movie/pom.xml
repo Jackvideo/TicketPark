@@ -13,12 +13,12 @@
     <name>tp_movie</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <!--        引入公共模块-->
         <dependency>
-            <groupId>com.TicketPark</groupId>
+            <groupId>com</groupId>
             <artifactId>tp_common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
