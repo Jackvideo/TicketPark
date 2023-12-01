@@ -1,6 +1,6 @@
 package com.tp_user.service.impl;
 
-import com.tp_common.util.ResultUtil;
+import com.tp_common.dto.Result;
 import com.tp_user.model.entity.User;
 import com.tp_user.mapper.UserMapper;
 import com.tp_user.service.UserService;
@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
+
 
 /**
  * <p>
@@ -25,7 +25,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
     @Override
-    public ResultUtil login(User user) {
-        return null;
+    public Result login(User user) {
+        //TODO
+        return Result.ok();
+    }
+
+    @Override
+    public Result modify(User user) {
+        //TODO
+        return Result.ok();
     }
 }

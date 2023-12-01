@@ -3,14 +3,15 @@
 
 -- drop database if exists ticket;
 use ticket;
+
 drop table if exists movies;
 CREATE TABLE `movies` (
                           `movieid` int NOT NULL COMMENT '电影ID',
                           `moviename` varchar(20) DEFAULT NULL COMMENT '电影名',
                           `description` varchar(100) DEFAULT NULL COMMENT '描述',
                           `ticket_price` double DEFAULT NULL COMMENT '票价',
-                          `start_time` date not null comment '上映时间',
-                          `type` int DEFAULT NULL COMMENT '类别',
+                          `release_date` date not null comment '上映时间',
+                          `type` varchar(10) DEFAULT NULL COMMENT '类别',
                           `image_url` varchar(255) DEFAULT NULL COMMENT '图片URL',
                           PRIMARY KEY (`movieid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

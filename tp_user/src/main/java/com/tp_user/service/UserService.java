@@ -1,6 +1,7 @@
 package com.tp_user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tp_common.dto.Result;
 import com.tp_common.util.ResultUtil;
 import com.tp_user.model.entity.User;
 
@@ -14,5 +15,7 @@ import com.tp_user.model.entity.User;
  */
 public interface UserService extends IService<User> {
 
-    public ResultUtil login(User user);
+    public Result login(User user);
+
+    Result modify(User user);
 }
