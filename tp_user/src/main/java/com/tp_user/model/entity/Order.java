@@ -28,6 +28,10 @@ public static final String STATE_UNPAID="UNPAID";
 
 public static final String STATE_FINISHED="FINISHED";
 
+public static final String STATE_FAILED="FAILED";
+
+public static final String STATE_CANCELED="CANCELED";
+
  @TableId("orderid")
 private Integer orderid;
 

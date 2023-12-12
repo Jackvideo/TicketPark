@@ -31,6 +31,8 @@ public class UpdateOrderListener {
             Order order=ordersService.getById((Integer)data.getData());
             if(data.getCode()==-1)//支付失败
                 order.setOrderstate(Order.STATE_FAILED);
+            else if(data.getCode()==0)//取消支付
+                order.setOrderstate(Order.STATE_CANCELED);
             else//支付成功
             order.setOrderstate(Order.STATE_FINISHED);
             ordersService.updateById(order);

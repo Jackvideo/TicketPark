@@ -3,6 +3,7 @@ package com.tp_movie.controller;
 import cn.hutool.core.util.StrUtil;
 import com.tp_common.constant.SystemConstants;
 import com.tp_common.util.ResultUtil;
+import com.tp_movie.model.entity.Comments;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.*;
@@ -98,6 +99,15 @@ public class MoviesController {
                 .page(new Page<>(currentPage, SystemConstants.MAX_PAGE_SIZE));
         // 返回数据
         return ResultUtil.success(page.getRecords());
+    }
+
+    /**
+     * 电影评论点赞功能
+    */
+
+    @PostMapping
+    public Comments createComment(@RequestBody Comments comments){
+
     }
 
 }

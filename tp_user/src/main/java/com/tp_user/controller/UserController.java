@@ -41,11 +41,12 @@ public class UserController {
         return  userService.list();
     }
 
+    //注册用户
     @PostMapping("/register")
-  public ResultUtil register (@RequestBody User user){
+    public ResultUtil register (@RequestBody User user){
         return userService.register(user);
   }
-
+    //登录用户
     @PostMapping("/login")
     public ResultUtil<Map<String,Object>> login(@RequestBody User user){
         // 因为 user传过来为json字符串，所以用@RequestBody 进行实体转换
@@ -59,7 +60,7 @@ public class UserController {
         return ResultUtil.fail("登陆失败：用户名或密码错误");
     }
 
-
+    //获取用户信息
     @GetMapping("/info")
     public ResultUtil<Map<String,Object>> getUserInfo(@RequestParam("token") String token){
         // @RequestParam("token") 是从url中获取值
@@ -72,16 +73,20 @@ public class UserController {
 
     }
 
+    //修改用户信息
+    @PostMapping("/modify")
     public ResultUtil<Map<String,Object>> modifyUser(@RequestBody User user){
         return userService.modifyUser(user);
     }
 
+    //退出登录
     @PostMapping("/logout")
     public ResultUtil<?> logout(@RequestHeader("token") String token){
         userService.logout(token);
         return ResultUtil.success("用户注销成功");
     }
 
+    //支付订单，发送结果消息
     @PostMapping("/pay")
     public ResultUtil payOrder(@RequestBody Order order){
         Integer userid= order.getUserid();
@@ -91,8 +96,24 @@ public class UserController {
         rabbitTemplate.convertAndSend("pay.direct","order.update",resultUtil);
         return resultUtil;
     }
+    //取消订单，发送取消消息
+    @PostMapping("/cancel")
+    public ResultUtil cancelOrder(@RequestBody Order order){
+        ResultUtil resultUtil = new ResultUtil();
+        resultUtil.setCode(0);
+        resultUtil.setData(order.getOrderid());
+        rabbitTemplate.convertAndSend("pay.direct","order.update",resultUtil);
+        resultUtil.setMessage("取消订单！");
+        return resultUtil;
+    }
 
-    //根据用户id获取订单
+    //根据用户id获取用户名
+    @GetMapping("/getName")
+    public String getUserNameById(@RequestParam("userid") Integer uid){
+        return userService.getById(uid).getUsername();
+    }
+
+    //根据用户id获取订单(远程调用订单业务）
     @GetMapping("/orders")
     public List<Order> getOrderList(@RequestParam("userid") Integer uid){
         return ordersService.findByUserId(uid);

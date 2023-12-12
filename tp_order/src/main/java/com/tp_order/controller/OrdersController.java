@@ -39,16 +39,9 @@ public class OrdersController {
     //创建订单
     @PostMapping("/create")
     public ResultUtil createOrder(@RequestBody Order order) {
-        //创建订单
+        //前端传入包含完整信息的订单，在数据库中创建
         return ordersService.createOrder(order);
-
     }
-
-    //根据id删除
-    @DeleteMapping("/{id}")
-    public ResultUtil delete(@PathVariable Integer id) {
-        return ResultUtil.success(ordersService.removeById(id));
-        }
 
     //根据用户id获取订单
     @GetMapping("/uid={id}")
@@ -57,6 +50,13 @@ public class OrdersController {
         wrapper.eq("userid",id);
         return ordersService.list(wrapper);
     }
+
+
+    //根据id删除
+    @DeleteMapping("/{id}")
+    public ResultUtil delete(@PathVariable Integer id) {
+        return ResultUtil.success(ordersService.removeById(id));
+        }
 
     //查询全部
     @GetMapping("/getAll")
