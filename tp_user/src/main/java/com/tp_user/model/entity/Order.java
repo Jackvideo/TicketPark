@@ -1,14 +1,15 @@
-package com.tp_order.model.entity;
+package com.tp_user.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-        import lombok.experimental.Accessors;
-    
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
  * 
@@ -26,8 +27,6 @@ public class Order implements Serializable {
 public static final String STATE_UNPAID="UNPAID";
 
 public static final String STATE_FINISHED="FINISHED";
-
-public static final String STATE_FAILED="FAILED";
 
  @TableId("orderid")
 private Integer orderid;

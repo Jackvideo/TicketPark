@@ -3,7 +3,7 @@
 <mapper namespace="com.tp_order.mapper.OrdersMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.tp_order.model.entity.Orders">
+    <resultMap id="BaseResultMap" type="com.tp_order.model.entity.Order">
         <id column="orderid" property="orderid" />
         <result column="userid" property="userid" />
         <result column="movieid" property="movieid" />

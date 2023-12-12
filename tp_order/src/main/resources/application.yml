@@ -1,29 +1,3 @@
-#开发环境配置
 spring:
-  application:
-    name: tpuser
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-        ip: localhost
-        port: 8081
-  #配置数据库连接
-  datasource:
-    druid:
-      url: jdbc:mysql://localhost:3306/Ticket?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&rewriteBatchedStatements=true
-      username: root
-      password: 123456
-      driver-class-name: com.mysql.cj.jdbc.Driver
-server:
-  port: 8081
-
-
-
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true #驼峰命名匹配
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #控制台输出mysql信息
-  global-config:
-    db-config:
-      id-type: assign_id #使用雪花算法生成id
+  profiles:
+    active: self

@@ -1,7 +1,8 @@
 package com.tp_order.service;
 
-import com.tp_order.model.entity.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tp_common.util.ResultUtil;
+import com.tp_order.model.entity.Order;
 
 /**
  * <p>
@@ -11,6 +12,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Jackvideo
  * @since 2023-11-10 11:19
  */
-public interface OrdersService extends IService<Orders> {
+public interface OrdersService extends IService<Order> {
+
+    public ResultUtil createOrder(Order order);
 
 }

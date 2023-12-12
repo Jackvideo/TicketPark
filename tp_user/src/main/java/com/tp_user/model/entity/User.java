@@ -26,9 +26,6 @@ public class User implements Serializable {
  @TableId("userid")
 private Integer userid;
 
-@TableField("account")
-private String account;
-
 @TableField("username")
 private String username;
 

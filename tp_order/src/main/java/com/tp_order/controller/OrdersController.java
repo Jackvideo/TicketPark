@@ -1,12 +1,18 @@
 package com.tp_order.controller;
 
-import com.ticketpark.tp_common.util.ResultUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.tp_common.util.ResultUtil;
+import com.tp_order.client.UserService;
+import com.tp_order.model.entity.Order;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.*;
 
 import com.tp_order.service.OrdersService;
-import com.tp_order.model.entity.Orders;
+
+import java.util.List;
+import java.util.Queue;
 
 
 /**
@@ -18,23 +24,39 @@ import com.tp_order.model.entity.Orders;
  * @since 2023-11-10 11:19
  */
 @RestController
-@RequestMapping("/tp_order/orders")
+@RequestMapping("/tp_order")
 public class OrdersController {
 
     @Autowired
     private OrdersService ordersService;
 
-    //编辑或更新
-    @PostMapping("/saveOrUpdate")
-    public ResultUtil save(@RequestBody Orders orders) {
-        return ResultUtil.success(ordersService.saveOrUpdate(orders));
-        }
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    //创建订单
+    @PostMapping("/create")
+    public ResultUtil createOrder(@RequestBody Order order) {
+        //创建订单
+        return ordersService.createOrder(order);
+
+    }
 
     //根据id删除
     @DeleteMapping("/{id}")
     public ResultUtil delete(@PathVariable Integer id) {
         return ResultUtil.success(ordersService.removeById(id));
         }
+
+    //根据用户id获取订单
+    @GetMapping("/uid={id}")
+    public List<Order> findByUserId(@PathVariable Integer id){
+        QueryWrapper<Order> wrapper=new QueryWrapper<>();
+        wrapper.eq("userid",id);
+        return ordersService.list(wrapper);
+    }
 
     //查询全部
     @GetMapping("/getAll")
