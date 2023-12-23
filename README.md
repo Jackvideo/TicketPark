@@ -7,6 +7,18 @@
 <h1>TicketPark</h1>
 TicketPark是一个基于SpringCloudAlibaba微服务框架，使用Java语言编写的一个电影院购票系统，用户可以在该平台浏览电影信息，购票和评价。
 
+<h2>启动配置</h2>
+1.mysql数据库：在各个application-dev.yml中将datasource的url配置成自己的数据库地址，启动mysql服务，执行common模块下resources里的sql文件。
+
+2.安装redis服务器：启动redis服务，默认端口6379
+
+3.安装Nacos server，使用版本为2.2.3
+
+4.安装rabbitMQ服务，版本号为3.12.10
+
+5.前端git pull后，执行npm install安装依赖，然后npm run serve启动服务
+
+
 <h2>详细需求：</h2>
 1.	可以进行用户注册、登录。
 2.	可以进行电影搜索。
@@ -31,3 +43,5 @@ TicketPark是一个基于SpringCloudAlibaba微服务框架，使用Java语言编
 后端：SpringBoot、 Mybatis-Plus 、 SpringCloud Alibaba
 数据库：Mysql、Redis
 前端：Vue
+
+

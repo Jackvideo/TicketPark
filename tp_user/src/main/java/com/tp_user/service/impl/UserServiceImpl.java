@@ -46,7 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return ResultUtil.fail("用户名已存在");
         wrapper.clear();
         //获取最后一个元素，得到主键值
-        wrapper.last("limit 1");
+        wrapper.last("order by userid desc limit 1");
         User lastUser=userMapper.selectOne(wrapper);
         user.setUserid(lastUser==null?1: lastUser.getUserid()+1);
         userMapper.insert(user);

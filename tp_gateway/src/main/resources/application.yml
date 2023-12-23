@@ -22,6 +22,26 @@ spring:
           uri: lb://tp-user/ #lb标识使用负载均衡，后面是该应用在Nacos中的地址标识（服务名称）
           predicates:
             - Path=/tp_user/** #拦截有该前缀的请求并把它交给对应的应用
+      #配置CORS跨域
+      globalcors:
+        add-to-simple-url-handler-mapping: true #运行options类型的试探性访问
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*" #允许所有的网址进行跨域请求
+            #设置允许访问的类型
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "DELETE"
+              - "OPTIONS"
+            allowedHeaders: "*" #允许所有类型的请求头
+            allowCredentials: true #允许携带cookies
+            maxAge: 360000 #这次请求的最大有效期
+      # 解决双重跨域
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/ticket?characterEncoding=utf8
