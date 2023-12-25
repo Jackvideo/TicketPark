@@ -3,6 +3,7 @@ package com.tp_movie.model.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -46,4 +47,14 @@ private String type;
 @TableField("image_url")
 private String imageUrl;
 
+<<<<<<< Updated upstream
+=======
+@TableField("likes_counts")
+private Integer likes_counts;
+
+@TableField("comments_counts")
+private Integer comments_counts;
+
+
+>>>>>>> Stashed changes
 }

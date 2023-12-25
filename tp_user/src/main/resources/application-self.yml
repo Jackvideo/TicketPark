@@ -1,0 +1,40 @@
+#开发环境配置
+spring:
+  application:
+    name: tp-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        ip: localhost
+        port: 8081
+        username: nacos
+        password: nacos
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 10
+          min-idle: 1
+          time-between-eviction-runs: 10s
+  #配置数据库连接
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/ticket?characterEncoding=utf8
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  #配置rabbitmq
+  rabbitmq:
+    host: localhost # 你的虚拟机IP
+    port: 5672 # 端口
+    virtual-host: /test # 虚拟主机
+    username: froggy # 用户名
+    password: 123456 # 密码
+server:
+  port: 8081
+

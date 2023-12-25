@@ -20,9 +20,16 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+<<<<<<< Updated upstream:tp_order/src/main/java/com/tp_order/model/entity/Orders.java
 @TableName("orders")
 public class Orders implements Serializable {
 
+=======
+@TableName("comments")
+public class Comments implements Serializable {
+@TableId("commentid")
+private Integer commentid;
+>>>>>>> Stashed changes:tp_movie/src/main/java/com/tp_movie/model/entity/Comments.java
 
  @TableId("orderid")
 private Integer orderid;
@@ -33,8 +40,16 @@ private Integer userid;
 @TableField("movieid")
 private Integer movieid;
 
+<<<<<<< Updated upstream:tp_order/src/main/java/com/tp_order/model/entity/Orders.java
 @TableField("ticketprice")
 private Double ticketprice;
+=======
+/**
+ * 用户ID
+ */
+@TableField("userid")
+private Integer userid;
+>>>>>>> Stashed changes:tp_movie/src/main/java/com/tp_movie/model/entity/Comments.java
 
 @TableField("orderstate")
 private String orderstate;

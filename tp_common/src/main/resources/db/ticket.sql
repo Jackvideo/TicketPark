@@ -17,6 +17,7 @@ CREATE TABLE `movies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+<<<<<<< Updated upstream
 
 
 drop table if exists user;
@@ -28,6 +29,48 @@ CREATE TABLE `user` (
                         `balance` double DEFAULT NULL COMMENT '余额',
                         PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+-- ----------------------------
+-- Table structure for comments
+-- ----------------------------
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments`  (
+  `commentid` int unique auto_increment comment '评论ID',
+  `userid` int(0) NOT NULL COMMENT '用户ID',
+  `movieid` int COMMENT '电影ID',
+  `comment` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '评论',
+  UNIQUE INDEX `userid`(`userid`) USING BTREE,
+  PRIMARY KEY (commentid)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for like&comments_counts
+-- ----------------------------
+DROP TABLE IF EXISTS `like&comments_counts`;
+/*CREATE TABLE `like&comments_counts`  (
+  `movieid` int(0) NOT NULL DEFAULT NULL COMMENT '电影ID',
+  `likes_counts` int(0) NULL DEFAULT 0 COMMENT '点赞量',
+  `comments_counts` int(0) NULL DEFAULT 0 COMMENT '评论量',
+  PRIMARY KEY (movieid) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;*/
+
+-- ----------------------------
+-- Table structure for movies
+-- ----------------------------
+DROP TABLE IF EXISTS `movies`;
+CREATE TABLE `movies`  (
+  `movieid` int(0) NOT NULL COMMENT '电影ID',
+  `moviename` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '电影名',
+  `description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '描述',
+  `ticket_price` double NULL DEFAULT NULL COMMENT '票价',
+  `start_time` date NOT NULL COMMENT '上映时间',
+  `type` int(0) NULL DEFAULT NULL COMMENT '类别',
+  `image_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '图片URL',
+  `likes_counts` int(0) NULL DEFAULT 0 COMMENT '点赞量',
+  `comments_counts` int(0) NULL DEFAULT 0 COMMENT '评论量',
+  PRIMARY KEY (`movieid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+>>>>>>> Stashed changes
 
 INSERT INTO `user` VALUES (20000, '0001', 'user0001', 'password0001', 1000.00);
 INSERT INTO `user` VALUES (20001, '0002', 'user0002', 'password0002', 1500.00);
