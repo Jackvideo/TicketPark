@@ -11,7 +11,7 @@
  Target Server Version : 80033
  File Encoding         : 65001
 
- Date: 11/12/2023 11:48:17
+ Date: 25/12/2023 11:00:42
 */
 
 SET NAMES utf8mb4;
@@ -22,19 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments`  (
-  `userid` int(0) NOT NULL COMMENT '用户ID',
-  `comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '评论',
-  UNIQUE INDEX `userid`(`userid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for like&comments_counts
--- ----------------------------
-DROP TABLE IF EXISTS `like&comments_counts`;
-CREATE TABLE `like&comments_counts`  (
   `movieid` int(0) NULL DEFAULT NULL COMMENT '电影ID',
-  `likes_counts` int(0) NULL DEFAULT NULL COMMENT '点赞量',
-  `comments_counts` int(0) NULL DEFAULT NULL COMMENT '评论量'
+  `userid` int(0) NOT NULL COMMENT '用户ID',
+  `comment` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '评论',
+  UNIQUE INDEX `userid`(`userid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -42,22 +33,29 @@ CREATE TABLE `like&comments_counts`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `movies`;
 CREATE TABLE `movies`  (
-  `movieid` int(0) NOT NULL COMMENT '电影ID',
+  `movieid` int(0) NOT NULL AUTO_INCREMENT COMMENT '电影ID',
   `moviename` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '电影名',
   `description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '描述',
   `ticket_price` double NULL DEFAULT NULL COMMENT '票价',
   `start_time` date NOT NULL COMMENT '上映时间',
   `type` int(0) NULL DEFAULT NULL COMMENT '类别',
   `image_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '图片URL',
+  `like_count` int(0) NULL DEFAULT 0,
+  `comment_count` int(0) NULL DEFAULT 0,
   PRIMARY KEY (`movieid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of movies
+-- ----------------------------
+INSERT INTO `movies` VALUES (1, '你的名字', '煞笔二次元', 1000, '2012-01-20', 1, '1231231', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for orders
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
-  `orderid` int(0) NOT NULL COMMENT '订单ID',
+  `orderid` int(0) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
   `userid` int(0) NULL DEFAULT NULL COMMENT '用户ID',
   `movieid` int(0) NULL DEFAULT NULL COMMENT '电影ID',
   `ticketprice` double NULL DEFAULT NULL COMMENT '票价',
@@ -70,6 +68,11 @@ CREATE TABLE `orders`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (1, 20000, 1, 1000, 'FINISHED', '2023-12-11 22:49:54', 'jack', '你的名字');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -80,12 +83,12 @@ CREATE TABLE `user`  (
   `balance` double NULL DEFAULT NULL COMMENT '余额',
   PRIMARY KEY (`userid`) USING BTREE,
   UNIQUE INDEX `userid`(`userid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20044 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (20000, 'jack', '123456', 1000);
+INSERT INTO `user` VALUES (20000, 'jack', '123456', 99000);
 INSERT INTO `user` VALUES (20001, 'user0002', 'password0002', 1500);
 INSERT INTO `user` VALUES (20002, 'user0003', 'password0003', 2000);
 INSERT INTO `user` VALUES (20003, 'user0004', 'password0004', 2500);
@@ -129,5 +132,6 @@ INSERT INTO `user` VALUES (20040, 'user0041', 'password0041', 2000);
 INSERT INTO `user` VALUES (20041, 'user0042', 'password0042', 2000);
 INSERT INTO `user` VALUES (20042, 'user0043', 'password0043', 2000);
 INSERT INTO `user` VALUES (20043, 'user0044', 'password0044', 2000);
+INSERT INTO `user` VALUES (20044, 'Pewdiepie1', '123456', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

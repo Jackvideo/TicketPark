@@ -75,13 +75,13 @@ public class UserController {
 
     //修改用户信息
     @PostMapping("/modify")
-    public ResultUtil<Map<String,Object>> modifyUser(@RequestBody User user){
+    public ResultUtil modifyUser(@RequestBody User user){
         return userService.modifyUser(user);
     }
 
     //退出登录
     @PostMapping("/logout")
-    public ResultUtil<?> logout(@RequestHeader("token") String token){
+    public ResultUtil logout(@RequestHeader("token") String token){
         userService.logout(token);
         return ResultUtil.success("用户注销成功");
     }

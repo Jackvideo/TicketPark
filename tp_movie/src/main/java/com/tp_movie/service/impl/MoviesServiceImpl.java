@@ -28,33 +28,6 @@ public class MoviesServiceImpl extends ServiceImpl<MoviesMapper, Movies> impleme
     @Autowired
     private RedisUtils redisUtils;
 
-    @Override
-    public ResultUtil queryById(Integer id) {
-        String key=CACHE_MOVIE_KEY+id;
-        //1.check key from redis
-        if(redisUtils.hasKey(key)){
-            //2.return if exists
-            Movies movies=redisUtils.get(key);
-            return ResultUtil.success(movies);
-        }
-        //3.query from db if not exists
-        Movies movies=getById(id);
-        //5.not exists,return fail
-        if(movies==null){
-            return ResultUtil.fail("movie not exists");
-        }
-        //6.exists, save to redis
-        redisUtils.set(key,movies);
-        return ResultUtil.success(movies);
-    }
 
-    @Override
-    public ResultUtil removeById(Integer id) {
-        String key=CACHE_MOVIE_KEY+id;
-        List<String> keys=new java.util.ArrayList<>();
-        keys.add(key);
-        redisUtils.delete(keys);
-        return ResultUtil.success(super.removeById(id));
-    }
 
 }

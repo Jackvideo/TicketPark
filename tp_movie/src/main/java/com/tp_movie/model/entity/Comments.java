@@ -1,5 +1,6 @@
 package com.tp_movie.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -22,6 +23,8 @@ import lombok.EqualsAndHashCode;
 @TableName("comments")
 public class Comments implements Serializable {
 
+@TableId(value = "commentid",type = IdType.AUTO)
+private Integer commentid;
 
 /**
  * 电影ID
@@ -32,7 +35,7 @@ private Integer movieid;
 /**
  * 用户ID
  */
- @TableId("userid")
+@TableField("userid")
 private Integer userid;
 
 /**

@@ -1,5 +1,6 @@
 package com.tp_movie.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -25,7 +26,7 @@ import lombok.EqualsAndHashCode;
 public class Movies implements Serializable {
 
 
- @TableId("movieid")
+ @TableId(value = "movieid",type = IdType.ASSIGN_UUID)
 private Integer movieid;
 
 @TableField("moviename")
@@ -34,11 +35,11 @@ private String moviename;
 @TableField("description")
 private String description;
 
-@TableField("ticketprice")
-private Double ticketprice;
+@TableField("ticket_price")
+private Double ticketPrice;
 
-@TableField("releasedate")
-private LocalDateTime releasedate;
+@TableField("start_time")
+private LocalDateTime startTime;
 
 @TableField("type")
 private String type;
@@ -46,5 +47,10 @@ private String type;
 @TableField("image_url")
 private String imageUrl;
 
+@TableField("like_count")
+private Integer likeCount;
+
+@TableField("comment_count")
+private Integer commentCount;
 
         }

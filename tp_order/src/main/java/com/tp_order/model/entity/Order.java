@@ -1,5 +1,6 @@
 package com.tp_order.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -31,7 +32,7 @@ public static final String STATE_FAILED="FAILED";
 
 public static final String STATE_CANCELED="CANCELED";
 
- @TableId("orderid")
+@TableId(value = "orderid",type = IdType.AUTO)
 private Integer orderid;
 
 @TableField("userid")

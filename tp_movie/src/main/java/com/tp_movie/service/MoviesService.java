@@ -13,7 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-11-10 11:26
  */
 public interface MoviesService extends IService<Movies> {
-    ResultUtil queryById(Integer id);
 
-    ResultUtil removeById(Integer id);
 }
