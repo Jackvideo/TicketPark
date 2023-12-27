@@ -1,6 +1,8 @@
 package com.tp_movie.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tp_common.constant.SystemConstants;
 import com.tp_common.util.ResultUtil;
 import com.tp_movie.model.entity.Comments;
@@ -14,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import com.tp_movie.service.MoviesService;
 import com.tp_movie.model.entity.Movies;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -62,8 +69,41 @@ public class MoviesController {
 
     @GetMapping("/list")
     public List<Movies> getMoviesList(){
-
         return moviesService.list();
+    }
+
+    //获取正在热映的电影
+    @GetMapping("/hot")
+    public List<Movies> getHotMovies(){
+        //获取本地当前日期
+        LocalDate today=LocalDate.now();
+        LocalDate base=LocalDate.now().minusMonths(6);
+        QueryWrapper<Movies> wrapper=new QueryWrapper<>();
+        //半年前到今天上映的都算正在热映
+        wrapper.le("start_time",today);
+        wrapper.gt("start_time",base);
+        return moviesService.list(wrapper);
+    }
+
+    //获取即将上映电影
+    @GetMapping("/future")
+    public List<Movies> getFutureMovies(){
+        //获取本地当前日期
+        LocalDate today=LocalDate.now();
+        QueryWrapper<Movies> wrapper=new QueryWrapper<>();
+        //今天之后的都算即将上映电影
+        wrapper.gt("start_time",today);
+        return moviesService.list(wrapper);
+    }
+
+    //获取经典电影
+    @GetMapping("/epic")
+    public List<Movies> getEpicMovies(){
+        LocalDate base=LocalDate.now().minusYears(3);
+        QueryWrapper<Movies> wrapper=new QueryWrapper<>();
+        //三年之前的都算经典电影
+        wrapper.le("start_time",base);
+        return moviesService.list(wrapper);
     }
 
 
@@ -92,7 +132,7 @@ public class MoviesController {
      * @param currentPage 页码
      * @return 电影列表
      */
-    @GetMapping("/queryByname")
+    @GetMapping("/queryByName")
     public ResultUtil queryMoviesByName(
             @RequestParam(value = "moviename", required = false) String name,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage
@@ -144,10 +184,17 @@ public class MoviesController {
 
     }
 
+    @GetMapping("/findCommentsByMovieId{id}")
+    public List<Comments> findCommentsByMovieId(@PathVariable("id") Integer movieid){
+        QueryWrapper<Comments> wrapper=new QueryWrapper<>();
+        wrapper.eq("movieid",movieid);
+        return commentsService.list(wrapper);
+    }
+
     //删除评论
     @DeleteMapping("/deleteComment{id}")
     public ResultUtil deleteComment(@PathVariable("id") Integer userid,@RequestBody Comments comments){
-        if(comments.getUserid()!=userid)
+        if(!comments.getUserid().equals(userid))
             return ResultUtil.fail("非该用户评论，无法删除！");
         commentsService.removeById(comments);
         //更新电影评论数

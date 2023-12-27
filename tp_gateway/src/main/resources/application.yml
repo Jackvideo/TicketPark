@@ -22,6 +22,11 @@ spring:
           uri: lb://tp-user/ #lb标识使用负载均衡，后面是该应用在Nacos中的地址标识（服务名称）
           predicates:
             - Path=/tp_user/** #拦截有该前缀的请求并把它交给对应的应用
+
+        - id: tp-movie
+          uri: lb://tp-movie/ #lb标识使用负载均衡，后面是该应用在Nacos中的地址标识（服务名称）
+          predicates:
+            - Path=/tp_movie/** #拦截有该前缀的请求并把它交给对应的应用
       #配置CORS跨域
       globalcors:
         add-to-simple-url-handler-mapping: true #运行options类型的试探性访问

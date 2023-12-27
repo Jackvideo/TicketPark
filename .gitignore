@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+tp_user/src/main/resources/application-self.yml
+tp_order/src/main/resources/application-self.yml
+tp_movie/src/main/resources/application-self.yml
 ### STS ###
 .apt_generated
 .classpath

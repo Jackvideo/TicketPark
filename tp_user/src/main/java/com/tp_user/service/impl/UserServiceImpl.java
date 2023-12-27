@@ -107,8 +107,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      QueryWrapper<User> wrapper=new QueryWrapper<>();
      wrapper.eq("username",user.getUsername());
      //如果存在该用户id，可以执行修改
-     if(!userMapper.exists(wrapper)){
-        return ResultUtil.fail("用户名已存在存在");
+     if(userMapper.exists(wrapper)){
+        return ResultUtil.fail("用户名已存在");
      }
         //直接根据主键更新，即userid
         userMapper.updateById(user);
