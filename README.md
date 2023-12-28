@@ -31,16 +31,16 @@ TicketPark是一个基于SpringCloudAlibaba微服务框架，使用Java语言编
 配置模块
   实现相关配置集成
 网关模块
-  实现对访问请求的过滤
+  实现对访问请求的过滤和转发
 用户模块
-用户信息的存储、注册登录、电影票购买
+  用户信息的存储、注册登录、管理订单
 电影模块
-  查询电影、展示电影信息、点赞和评论模块
+  查询电影、展示电影信息、点赞和评论
 订单模块
- 查询订单
+  实现购票服务
 
 <h2>技术栈</h2>
-后端：SpringBoot、 Mybatis-Plus 、 SpringCloud Alibaba
+后端：SpringBoot、 Mybatis-Plus 、 SpringCloud Alibaba、RabbitMQ
 数据库：Mysql、Redis
 前端：Vue
 
