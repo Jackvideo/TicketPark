@@ -115,7 +115,7 @@ public class MoviesController {
      */
     @GetMapping("/queryByType")
     public ResultUtil queryMoviesByType(
-            @RequestParam("type") Integer type,
+            @RequestParam("type") String type,
             @RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage
     ) {
         // 根据类型分页查询
